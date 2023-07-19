@@ -2,6 +2,7 @@ package com.example.dounats.screens.homeScreen.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
@@ -17,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -41,10 +41,10 @@ import com.example.dounats.ui.theme.white
 @Composable
 fun OffersCard(
     donutImageId: Int = R.drawable.home_pink_donut,
-    backGround: Color = blueBackground,
     title: String = strawberry,
     bodyText: String = bodytext,
-    index: Int
+    index: Int,
+    onItemClick:()->Unit,
 
 ) {
     Box(modifier = Modifier.width(210.dp)) {
@@ -56,7 +56,8 @@ fun OffersCard(
                     .width(175.dp)
                     .constrainAs(card) {
                         start.linkTo(parent.start)
-                    },
+                    }
+                    .clickable { onItemClick() },
                 colors = CardDefaults.cardColors(containerColor = if (index == 0) blueBackground else pinkBackGround),
                 shape = RoundedCornerShape(20.dp)
             ) {
@@ -141,5 +142,5 @@ fun OffersCard(
 @Preview
 @Composable
 private fun Preview() {
-    OffersCard(index = 1)
+    OffersCard(index = 1){}
 }

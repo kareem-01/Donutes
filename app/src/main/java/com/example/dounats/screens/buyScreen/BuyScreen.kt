@@ -2,6 +2,7 @@ package com.example.dounats.screens.buyScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,11 +47,14 @@ import com.example.dounats.ui.theme.white
 
 @Composable
 fun BuyScreen(navController: NavHostController) {
-
+    BuyContent(
+        name = strawberry,
+        donutId = R.drawable.home_pink_donut,
+        onBackClick = { navController.popBackStack() })
 }
 
 @Composable
-fun BuyContent(name: String, donutId: Int) {
+fun BuyContent(name: String, donutId: Int, onBackClick: () -> Unit) {
     ConstraintLayout(
         Modifier
             .fillMaxSize()
@@ -62,8 +66,9 @@ fun BuyContent(name: String, donutId: Int) {
             painter = painterResource(id = R.drawable.back_arrow),
             contentDescription = null,
             tint = primaryColor,
-            modifier = Modifier.padding(start = 32.dp, top = 40.dp)
-
+            modifier = Modifier
+                .padding(start = 32.dp, top = 40.dp)
+                .clickable { onBackClick() }
         )
         Image(
             painter = painterResource(id = donutId),
@@ -165,5 +170,5 @@ fun BuyContent(name: String, donutId: Int) {
 @Preview
 @Composable
 private fun Preview() {
-    BuyContent(name = strawberry, donutId = R.drawable.home_pink_donut)
+    BuyContent(name = strawberry, donutId = R.drawable.home_pink_donut,{})
 }

@@ -1,6 +1,7 @@
 package com.example.dounats.screens.homeScreen.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,7 +27,7 @@ import com.example.dounats.ui.theme.labelXSmall
 import com.example.dounats.ui.theme.white
 
 @Composable
-fun DonutsCard(index: Int) {
+fun DonutsCard(index: Int, onItemClick: () -> Unit) {
     ConstraintLayout(modifier = Modifier.height(170.dp)) {
         val (donut, card) = createRefs()
         Card(
@@ -35,7 +36,8 @@ fun DonutsCard(index: Int) {
                 .width(138.dp)
                 .constrainAs(card) {
                     bottom.linkTo(parent.bottom)
-                },
+                }
+                .clickable { onItemClick() },
             colors = CardDefaults.cardColors(containerColor = white),
             shape = RoundedCornerShape(
                 topStart = 20.dp,
@@ -88,5 +90,5 @@ fun DonutsCard(index: Int) {
 @Preview
 @Composable
 private fun Preview() {
-    DonutsCard(0)
+    DonutsCard(0,{})
 }

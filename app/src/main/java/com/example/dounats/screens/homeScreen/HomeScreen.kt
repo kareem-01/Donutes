@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dounats.R
+import com.example.dounats.Screens
 import com.example.dounats.screens.homeScreen.composables.DonutsCard
 import com.example.dounats.screens.homeScreen.composables.OffersCard
 import com.example.dounats.ui.theme.Donuts
-import com.example.dounats.ui.theme.black
 import com.example.dounats.ui.theme.black60
 import com.example.dounats.ui.theme.bodyMedium
 import com.example.dounats.ui.theme.homeTitle
@@ -39,11 +39,15 @@ import com.example.dounats.ui.theme.white
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    HomeContent()
+    HomeContent(
+        onItemClick = {
+            navController.navigate(Screens.orderScreen.route)
+        }
+    )
 }
 
 @Composable
-fun HomeContent() {
+fun HomeContent(onItemClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -91,7 +95,7 @@ fun HomeContent() {
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(2) { index ->
-                OffersCard(index = index)
+                OffersCard(index = index, onItemClick = onItemClick)
             }
         }
         Text(
@@ -104,7 +108,7 @@ fun HomeContent() {
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(3) { index ->
-                DonutsCard(index = index)
+                DonutsCard(index = index, onItemClick)
             }
         }
     }
